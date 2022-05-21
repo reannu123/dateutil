@@ -643,7 +643,7 @@ class parser(object):
             raise ParserError("Unknown string format: %s", timestr)
 
         if len(res) == 0:
-            raise ParserError("String does not contain a date: %s", timestr)
+            raise ParserError2("String does not contain a date: %s", timestr)
 
         try:
             ret = self._build_naive(res, default)
@@ -1604,6 +1604,23 @@ class ParserError(ValueError):
         args = ", ".join("'%s'" % arg for arg in self.args)
         return "%s(%s)" % (self.__class__.__name__, args)
 
+class ParserError2(ValueError):
+    """Second Exception subclass used for any failure to parse a datetime string.
+
+    This is a subclass of :py:exc:`ValueError`, and should be raised any time
+    earlier versions of ``dateutil`` would have raised ``ValueError``.
+
+    .. versionadded:: 2.8.1
+    """
+    def __str__(self):
+        try:
+            return self.args[0] % self.args[1:]
+        except (TypeError, IndexError):
+            return super(ParserError2, self).__str__()
+
+    def __repr__(self):
+        args = ", ".join("'%s'" % arg for arg in self.args)
+        return "%s(%s)" % (self.__class__.__name__, args)
 
 class UnknownTimezoneWarning(RuntimeWarning):
     """Raised when the parser finds a timezone it cannot parse into a tzinfo.
