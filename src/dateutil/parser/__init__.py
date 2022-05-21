@@ -9,7 +9,7 @@ from .isoparser import isoparser, isoparse
 
 __all__ = ['parse', 'parser', 'parserinfo',
            'isoparse', 'isoparser',
-           'ParserError',
+           'ParserError', 'ParserError2',
            'UnknownTimezoneWarning']
 
 

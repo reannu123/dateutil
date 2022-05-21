@@ -49,7 +49,7 @@ from warnings import warn
 from .. import relativedelta
 from .. import tz
 
-__all__ = ["parse", "parserinfo", "ParserError"]
+__all__ = ["parse", "parserinfo", "ParserError", "ParserError2"]
 
 
 # TODO: pandas.core.tools.datetimes imports this explicitly.  Might be worth
